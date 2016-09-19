@@ -26,7 +26,12 @@ ul {
 }
 
 li {
+	float: left;
+}
 
+form {
+	position: relative;
+	top: 2rem;
 }
 
 footer {
@@ -34,4 +39,6 @@ footer {
 	position: absolute;
 	left: 0;
 	bottom: 0;
+	background-color: #eeeeee;
+	width: 100%;
 }
