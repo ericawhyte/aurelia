@@ -1,7 +1,38 @@
 <template>
 	<form role="form" submit.delegate="submitForm()">
+		<!--text field-->
 		<label for="animal">What is your favourite animal?</label>
-		<input type="text" value.bind="animal">
+		<input type="text" id="animal" value.bind="animal">
+
+		<br>
+		<br>
+
+		<!--checkbox-->
+		<label for="checkbox">Checkbox</label>
+		<input type="checkbox" id="checkbox" checked.bind="isChecked">
+
+		<br>
+		<br>
+
+		<!--radio buttons-->
+		<label for="radios" repeat.for="radio of radios">
+			<input type="radio" name="myRadios" model.bind="radio" checked.bind="$parent.selectedRadio">
+			${radio.text}
+		</label>
+
+		<br>
+		<br>
+
+		<!--select (options) list-->
+		<label for="select">select something</label>
+		<select id="select" value.bind="selectedOption">
+			<option repeat.for="option of options" model.bind="option">${option.text}</option>
+		</select>
+
+		<br>
+		<br>
+
 		<button type="submit">Submit</button>
+
 	</form>
 </template>
