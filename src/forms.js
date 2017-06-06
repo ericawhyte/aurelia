@@ -1,4 +1,9 @@
+import {ValidationRules, ValidationController} from "aurelia-validation";
+import {inject, NewInstance} from 'aurelia-framework';
+
+@inject(NewInstance.of(ValidationController))
 export class Forms {
+
 	//for the radio buttons
 	radios = [];
 	selectedRadio = {};
@@ -7,7 +12,12 @@ export class Forms {
 	options = [];
 	selectedOption = [];
 
-	constructor() {
+	controller;
+
+	constructor(controller) {
+
+		this.controller = controller;
+
 		//for the checkbox
 		this.isChecked = false;
 
@@ -26,6 +36,10 @@ export class Forms {
 			{id:3, text: 'blue'}
 		];
 		this.selectedOption;
+
+		ValidationRules.ensure((m: Forms) => {
+			return m.animal
+		}).required().on(this);
 	}
 
 	//for the textfield
@@ -37,5 +51,17 @@ export class Forms {
 		console.log("isChecked: " + this.isChecked);
 		console.log('checked: ' + this.selectedRadio.id);
 		console.log('selected: ' + this.selectedOption.id);
+		this.executeValidation();
 	};
+
+	executeValidation() {
+    this.controller.validate()
+      .then(errors => {
+        if (errors.length === 0) {
+          console.log('ok');
+        } else {
+          console.log('youHaveErrors');
+        }
+      });
+  }
 }
